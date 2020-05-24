@@ -1,17 +1,17 @@
 <?php
 
-namespace Zwijn\Monolog\Formatter;
+namespace Butopea\Monolog\Formatter;
 
 class LogdnaFormatterTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var \Zwijn\Monolog\Formatter\LogdnaFormatter
+     * @var \Butopea\Monolog\Formatter\LogdnaFormatter
      */
     private $logdnaFormatter = null;
 
     protected function setUp() {
         parent::setUp();
-        $this->logdnaFormatter = new \Zwijn\Monolog\Formatter\LogdnaFormatter();
+        $this->logdnaFormatter = new \Butopea\Monolog\Formatter\LogdnaFormatter();
     }
 
     public function testFormatAccordingToLogdnaStandard() {

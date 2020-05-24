@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Zwijn/Monolog package.
+ * This file is part of the Butopea/Monolog package.
  *
  * (c) Nicolas Vanheuverzwijn <nicolas.vanheu@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Zwijn\Monolog\Formatter;
+namespace Butopea\Monolog\Formatter;
 
 /**
  * Encode records in a json format compatible with Logdna
