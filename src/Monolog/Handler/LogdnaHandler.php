@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Zwijn/Monolog package.
+ * This file is part of the Butopea/Monolog package.
  *
  * (c) Nicolas Vanheuverzwijn <nicolas.vanheu@gmail.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Zwijn\Monolog\Handler;
+namespace Butopea\Monolog\Handler;
 
 /**
  * Sends log to Logdna. This handler uses logdna's ingestion api.
@@ -93,13 +93,18 @@ class LogdnaHandler extends \Monolog\Handler\AbstractProcessingHandler {
         \curl_setopt($this->curl_handle, CURLOPT_HTTPHEADER, $headers);
         \curl_setopt($this->curl_handle, CURLOPT_RETURNTRANSFER, true);
 
-        \Monolog\Handler\Curl\Util::execute($this->curl_handle, 5, false);
+        // Added a try/catch block to prevent a fatal error in production due to a curl error (e.g. empty reply from server)
+        try {
+            \Monolog\Handler\Curl\Util::execute($this->curl_handle, 5, false);
+        } catch (\RuntimeException $e) {
+            error_log('[MonologError] '.$e->getMessage());
+        }
     }
 
     /**
-     * @return \Zwijn\Monolog\Formatter\LogdnaFormatter
+     * @return \Butopea\Monolog\Formatter\LogdnaFormatter
      */
     protected function getDefaultFormatter() {
-        return new \Zwijn\Monolog\Formatter\LogdnaFormatter();
+        return new \Butopea\Monolog\Formatter\LogdnaFormatter();
     }
 }

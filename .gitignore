@@ -3,3 +3,4 @@ vendor
 
 # vim
 *.swp
+.idea

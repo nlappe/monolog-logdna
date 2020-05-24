@@ -4,13 +4,13 @@ Monolog backend for logdna. This backend use logdna [ingestion api](https://docs
 
 ## Install
 
-Install with compose `composer require nvanheuverzwijn/monolog-logdna`.
+Install with compose `composer require butopea/monolog-logdna`.
 
 ## Usage
 
 ```
 $logger = new \Monolog\Logger('general');
-$logdnaHandler = new \Zwijn\Monolog\Handler\LogdnaHandler('your-key', 'myappname', \Monolog\Logger::DEBUG);
+$logdnaHandler = new \Butopea\Monolog\Handler\LogdnaHandler('your-key', 'myappname', \Monolog\Logger::DEBUG);
 $logger->pushHandler($logdnaHandler); 
 
 # Sends debug level message "mylog" with some related meta-data
@@ -36,7 +36,7 @@ $INGESTION_KEY='';
 \date_default_timezone_set('America/Montreal');
 
 $logger = new \Monolog\Logger('general');
-$logdnaHandler = new \Zwijn\Monolog\Handler\LogdnaHandler($INGESTION_KEY, 'appname', \Monolog\Logger::DEBUG);
+$logdnaHandler = new \Butopea\Monolog\Handler\LogdnaHandler($INGESTION_KEY, 'appname', \Monolog\Logger::DEBUG);
 $logger->pushHandler($logdnaHandler);
 $logger->debug('mylog');
 ```
