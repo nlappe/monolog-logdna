@@ -92,10 +92,12 @@ class LogdnaHandler extends \Monolog\Handler\AbstractProcessingHandler {
         \curl_setopt($this->curl_handle, CURLOPT_POSTFIELDS, $data);
         \curl_setopt($this->curl_handle, CURLOPT_HTTPHEADER, $headers);
         \curl_setopt($this->curl_handle, CURLOPT_RETURNTRANSFER, true);
+        \curl_setopt($this->curl_handle, CURLOPT_CONNECTTIMEOUT, 3);
+        \curl_setopt($this->curl_handle, CURLOPT_TIMEOUT, 5);
 
         // Added a try/catch block to prevent a fatal error in production due to a curl error (e.g. empty reply from server)
         try {
-            \Monolog\Handler\Curl\Util::execute($this->curl_handle, 5, false);
+            \Monolog\Handler\Curl\Util::execute($this->curl_handle, 1, false);
         } catch (\RuntimeException $e) {
             error_log('[MonologError] '.$e->getMessage());
         }
