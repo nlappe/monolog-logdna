@@ -11,6 +11,8 @@
 
 namespace Butopea\Monolog\Handler;
 
+use Monolog\Formatter\FormatterInterface;
+
 /**
  * Sends log to Logdna. This handler uses logdna's ingestion api.
  *
@@ -79,7 +81,7 @@ class LogdnaHandler extends \Monolog\Handler\AbstractProcessingHandler {
     /**
      * @param array $record
      */
-    protected function write(array $record) {
+    protected function write(array $record): void {
         $headers = ['Content-Type: application/json'];
         $data = $record["formatted"];
 
@@ -106,7 +108,7 @@ class LogdnaHandler extends \Monolog\Handler\AbstractProcessingHandler {
     /**
      * @return \Butopea\Monolog\Formatter\LogdnaFormatter
      */
-    protected function getDefaultFormatter() {
+    protected function getDefaultFormatter(): FormatterInterface {
         return new \Butopea\Monolog\Formatter\LogdnaFormatter();
     }
 }
