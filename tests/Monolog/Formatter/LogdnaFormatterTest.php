@@ -5,13 +5,13 @@ namespace Butopea\Monolog\Formatter;
 class LogdnaFormatterTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var \Butopea\Monolog\Formatter\LogdnaFormatter
+     * @var \Nlappe\Monolog\Formatter\LogdnaFormatter
      */
     private $logdnaFormatter = null;
 
     protected function setUp() {
         parent::setUp();
-        $this->logdnaFormatter = new \Butopea\Monolog\Formatter\LogdnaFormatter();
+        $this->logdnaFormatter = new \Nlappe\Monolog\Formatter\LogdnaFormatter();
     }
 
     public function testFormatAccordingToLogdnaStandard() {

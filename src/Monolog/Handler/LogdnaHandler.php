@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Butopea\Monolog\Handler;
+namespace Nlappe\Monolog\Handler;
 
 use Monolog\Formatter\FormatterInterface;
 
@@ -106,9 +106,9 @@ class LogdnaHandler extends \Monolog\Handler\AbstractProcessingHandler {
     }
 
     /**
-     * @return \Butopea\Monolog\Formatter\LogdnaFormatter
+     * @return \Nlappe\Monolog\Formatter\LogdnaFormatter
      */
     protected function getDefaultFormatter(): FormatterInterface {
-        return new \Butopea\Monolog\Formatter\LogdnaFormatter();
+        return new \Nlappe\Monolog\Formatter\LogdnaFormatter();
     }
 }

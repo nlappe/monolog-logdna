@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Butopea\Monolog\Formatter;
+namespace Nlappe\Monolog\Formatter;
 
 /**
  * Encode records in a json format compatible with Logdna
