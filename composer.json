@@ -1,6 +1,6 @@
 {
     "name": "nlappe/monolog-logdna-laravel",
-    "description": "Logdna handler for Monolog",
+    "description": "LogDNA handler for Monolog",
     "keywords": ["log", "logging", "psr-3", "logdna", "laravel"],
     "homepage": "http://github.com/nlappe/monolog-logdna",
     "type": "library",
@@ -19,8 +19,9 @@
         }
     ],
     "require": {
-        "php": "^7.0",
-        "monolog/monolog": ">=1.0"
+        "php": "^7.1",
+        "monolog/monolog": ">=1.0",
+        "illuminate/support": ">=5.7.17"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5"
