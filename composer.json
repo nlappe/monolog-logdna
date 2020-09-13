@@ -1,8 +1,8 @@
 {
-    "name": "butopea/monolog-logdna",
+    "name": "nlappe/monolog-logdna-laravel",
     "description": "Logdna handler for Monolog",
-    "keywords": ["log", "logging", "psr-3", "logdna"],
-    "homepage": "http://github.com/butopea/monolog-logdna",
+    "keywords": ["log", "logging", "psr-3", "logdna", "laravel"],
+    "homepage": "http://github.com/nlappe/monolog-logdna",
     "type": "library",
     "license": "LGPL-3.0-only",
     "authors": [
@@ -13,6 +13,9 @@
         {
             "name": "Mohammad Tomaraei",
             "email": "mo@butopea.com"
+        },
+        {
+            "name": "Nils Lappe",
         }
     ],
     "require": {
@@ -23,10 +26,10 @@
         "phpunit/phpunit": "^5.5"
     },
     "autoload": {
-        "psr-4": {"Butopea\\Monolog\\": "src/Monolog"}
+        "psr-4": {"Nlappe\\Monolog\\": "src/Monolog"}
     },
     "autoload-dev": {
-        "psr-4": {"Butopea\\Monolog\\": "tests/Monolog"}
+        "psr-4": {"Nlappe\\Monolog\\": "tests/Monolog"}
     },
     "scripts": {
         "test": "phpunit"
