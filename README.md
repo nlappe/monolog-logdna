@@ -2,53 +2,53 @@
 
 Monolog backend for logdna. This backend use logdna [ingestion api](https://docs.logdna.com/v1.0/reference#api).
 
+## Reason for the Fork
+As everyone can see, this fork still uses the underlying curl implementation rather than Http/Guzzle way of Laravel. (which uses curl aswell, but you know...)
+I needed a fast, but timeout-configurable solution, so i went for a fork and adding the usual env/config handling.
+
+Maybe i will change the curl impl to a more laravely way - but as time is always tight it might take a while. 
+
 ## Install
 
-Install with compose `composer require butopea/monolog-logdna`.
+Install with compose `composer require nlappe/monolog-logdna-laravel`.
 
 ## Usage
 
-```
-$logger = new \Monolog\Logger('general');
-$logdnaHandler = new \Butopea\Monolog\Handler\LogdnaHandler('your-key', 'myappname', \Monolog\Logger::DEBUG);
-$logger->pushHandler($logdnaHandler); 
+In yout config->logging.php add this to your 'channels' array:
 
-# Sends debug level message "mylog" with some related meta-data
-$logger->debug(
-  "mylog",
-  [
-    'logdna-meta-data-field1' => ['value1' => 'value', 'value2' => 5],
-    'logdna-meta-data-field2' => ['value1' => 'value']
-  ]
-);
-```
+        'logdna' => [
+            'driver' => 'monolog',
+            'level' => 'debug',
+            'handler' => Nlappe\Monolog\Handler\LogdnaHandler::class,
+            'handler_with' => [
+                'ingestion_key' => env('LOG_DNA_API_KEY'),
+                'hostname' => config('app.name'),
+            ],
+            'formatter' => 'default',  // ##### does not work without this!
+        ],
 
-## Live Example
+Then configure it to be used. E.g. add it to the stack channel as an additional log target.
 
-Create the following php script `test.php`. Don't forget to set the ingestion key prior to running this script.
+    'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single', 'logdna'],
+            'ignore_exceptions' => false,
+        ],
+        ...
+     ]
 
-```
-<?php
-
-include './vendor/autoload.php';
-
-$INGESTION_KEY='';
-\date_default_timezone_set('America/Montreal');
-
-$logger = new \Monolog\Logger('general');
-$logdnaHandler = new \Butopea\Monolog\Handler\LogdnaHandler($INGESTION_KEY, 'appname', \Monolog\Logger::DEBUG);
-$logger->pushHandler($logdnaHandler);
-$logger->debug('mylog');
-```
-
-Execute it with the following docker command.
-
-```
-docker run -it --rm -v "${PWD}":/usr/src/myapp -w /usr/src/myapp php:5.6-cli php test.php
-```
-
-You should see the log 'mylog' with debug level in the logdna account for which the ingestion key is bound to.
-
+## Config
+To modify the curl timeouts create the follwoing keys in your logging.php config file:
+ <br/>
+  `return [`<br/>
+  `'curl_connect_timeout' => env('CURL_CONNECT_TIMEOUT', 3),`<br/>
+  `'curl_request_timeout' => env('CURL_REQUEST_TIMEOUT', 5),`<br/>
+ `]`
+ 
+curl_connect_timeout is responsible for the connection timeout. If curl doesnt receive any bytes in the given amount of seconds it will throw an error.
+curl_request_timeout is responsible for the request timeout. if the request takes longer than the specified time in seconds, it will abort and throw an error.
+  
 ## License
 
 This project is licensed under LGPL3.0. See `LICENSE` file for details.
